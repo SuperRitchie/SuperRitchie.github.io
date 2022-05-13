@@ -1282,6 +1282,12 @@ input, select, textarea {
 				background: #ffffff;
 			}
 
+			@media (max-width: 740px) {
+				img {
+					z-index: 1;
+				}
+			}
+
 		#header > :first-child {
 			margin-top: 0;
 		}
