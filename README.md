@@ -1,4 +1,4 @@
 # SuperRitchie.github.io
 Personal website
 
-Custom domain: ritchiek.engineer
+Custom domain: ritchie-k.engineer
