@@ -11,68 +11,9 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/npits.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	<style>
-/* NPITS visuals grid (responsive) */
-.npits-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.npits-caption {
-  font-size: 0.85em;
-  opacity: 0.8;
-  margin-top: 0.35rem;
-  line-height: 1.25;
-}
-.npits-img {
-  display: flex;
-  flex-direction: column;
-}
-
-.npits-grid img {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  object-fit: contain;
-  border-radius: 0.5rem;
-  display: block;
-  background: #111;      /* letterbox color */
-  padding: 0rem;       /* letterboxing? intentional */
-}
-
-
-
-.video-embed {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%; /* 16:9 */
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
-}
-
-.video-embed iframe {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
-
-#work .icons li {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-#work .icons span:not(.label) {
-  opacity: 0.85;
-  font-size: 0.9rem;
-}
-
-
 </style>
 </head>
 	<body class="is-preload">
@@ -122,15 +63,42 @@
 								<h2 class="major">Work</h2>
 								<span class="image main"><img src="images/cpu.png" alt="" /></span>
 								<p>Most of my work can be found on my <a href="https://github.com/SuperRitchie">GitHub</a> page located in the 'Contact' section of the homepage. My projects range from personal to academic in the programming languages of Python, Java, C++, and Haskell.</p>
-								<p>
-									<a href="https://github.com/SuperRitchie/chess">Chess engine in React!</a>
-									<br>
-									<a href="https://github.com/SuperRitchie/Automatic-U-Pass-BC-Renewer">Automatic U-Pass BC renewer!</a>
-									<br>
-									<a href="https://github.com/SuperRitchie/Ambilamp">AmbiLamp (design project)</a>
-									<br>
-									<a href="https://superritchie.github.io/ttt-react">Tic-Tac-Toe (React)</a>
-								</p>
+								<h3>Projects</h3>
+								<ul class="icons work-projects">
+								<li>
+									<a href="https://github.com/SuperRitchie/chess"
+									class="icon brands fa-github"
+									target="_blank" rel="noopener">
+									<span class="label">Chess Engine</span>
+									</a>
+									<span>Chess engine in React</span>
+								</li>
+								<li>
+									<a href="https://github.com/SuperRitchie/Automatic-U-Pass-BC-Renewer"
+									class="icon brands fa-github"
+									target="_blank" rel="noopener">
+									<span class="label">U-Pass Renewer</span>
+									</a>
+									<span>Automatic U-Pass BC renewer</span>
+								</li>
+								<li>
+									<a href="https://github.com/SuperRitchie/Ambilamp"
+									class="icon brands fa-github"
+									target="_blank" rel="noopener">
+									<span class="label">AmbiLamp</span>
+									</a>
+									<span>AmbiLamp (design project)</span>
+								</li>
+								<li>
+									<a href="https://superritchie.github.io/ttt-react"
+									class="icon solid fa-link"
+									target="_blank" rel="noopener">
+									<span class="label">Tic Tac Toe</span>
+									</a>
+									<span>Tic-Tac-Toe (React)</span>
+								</li>
+								</ul>
+
 <hr />
 <h3>Near Pass Incident Tracking System (NPITS)</h3>
 <p>

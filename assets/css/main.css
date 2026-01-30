@@ -1672,3 +1672,15 @@ input, select, textarea {
 		body.is-preload #footer {
 			opacity: 0;
 		}
+
+		#work .work-projects li {
+			display: flex;
+			align-items: center;
+			gap: 0.6rem;
+			margin-bottom: 0.4rem;
+		}
+
+		#work .work-projects span:not(.label) {
+		opacity: 0.85;
+		font-size: 0.95rem;
+		}

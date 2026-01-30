@@ -1,0 +1,62 @@
+/* =========================
+   NPITS PROJECT STYLES
+   ========================= */
+
+/* NPITS visuals grid (responsive) */
+.npits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.npits-caption {
+  font-size: 0.85em;
+  opacity: 0.8;
+  margin-top: 0.35rem;
+  line-height: 1.25;
+}
+.npits-img {
+  display: flex;
+  flex-direction: column;
+}
+
+.npits-grid img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  display: block;
+  background: #111;      /* letterbox color */
+  padding: 0rem;       /* letterboxing? intentional */
+}
+
+
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+#work .icons li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#work .icons span:not(.label) {
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
