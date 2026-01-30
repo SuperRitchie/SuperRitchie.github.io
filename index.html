@@ -61,6 +61,18 @@
   border: 0;
 }
 
+#work .icons li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+#work .icons span:not(.label) {
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+
 </style>
 </head>
 	<body class="is-preload">
@@ -130,6 +142,26 @@
   <li><b>Camera:</b> GoPro ride footage with HiLight tags for quick jump-to-incident moments</li>
   <li><b>App:</b> Start/stop rides, sync incidents, view on a map, and export data for advocacy/GIS</li>
 </ul>
+<h4>Source Code</h4>
+<ul class="icons">
+  <li>
+    <a href="https://github.com/SuperRitchie/npits-firmware"
+       class="icon brands fa-github"
+       target="_blank" rel="noopener">
+      <span class="label">NPITS Hub</span>
+    </a>
+    <span>Hub / sensor firmware</span>
+  </li>
+  <li>
+    <a href="https://github.com/SuperRitchie/npits-app"
+       class="icon brands fa-github"
+       target="_blank" rel="noopener">
+      <span class="label">NPITS App</span>
+    </a>
+    <span>Companion app & data pipeline</span>
+  </li>
+</ul>
+
 <h3>Demo Video</h3>
 <p class="project-note">
   Full system demo showing GoPro capture on bike around the SFU Burnaby campus, incident detection,
@@ -139,7 +171,7 @@
 
 <div class="video-embed">
   <iframe
-    src="https://drive.google.com/file/d/1CGw2sgD-CvxUzIAp1bN5pHZmjvuuuvKx/preview"
+    src="https://drive.google.com/file/d/1lNTy_OiJ6IyS89TDeg3a0m8CRek_NhAg/preview"
 	width="640"
 	height="480"
     allow="autoplay">
