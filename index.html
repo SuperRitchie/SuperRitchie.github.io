@@ -12,7 +12,57 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
+	<style>
+/* NPITS visuals grid (responsive) */
+.npits-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.npits-caption {
+  font-size: 0.85em;
+  opacity: 0.8;
+  margin-top: 0.35rem;
+  line-height: 1.25;
+}
+.npits-img {
+  display: flex;
+  flex-direction: column;
+}
+
+.npits-grid img {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  display: block;
+  background: #111;      /* letterbox color */
+  padding: 0rem;       /* letterboxing? intentional */
+}
+
+
+
+.video-embed {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* 16:9 */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.video-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+</style>
+</head>
 	<body class="is-preload">
 
 		<!-- Wrapper -->
@@ -69,7 +119,85 @@
 									<br>
 									<a href="https://superritchie.github.io/ttt-react">Tic-Tac-Toe (React)</a>
 								</p>
-								<p>I am also an avid learner of JavaScript web development frameworks and technologies such as Node, React, Vue, and Express. Stay tuned for projects using those technologies!</p>
+<hr />
+<h3>Near Pass Incident Tracking System (NPITS)</h3>
+<p>
+  A cyclist safety system that detects and records close-pass incidents using a sensor hub + GoPro,
+  then syncs highlights to a companion app for post-ride review and mapping
+</p>
+<ul>
+  <li><b>Hub:</b> Raspberry Pi-based detector with ultrasonic distance sensing + rear-facing radar</li>
+  <li><b>Camera:</b> GoPro ride footage with HiLight tags for quick jump-to-incident moments</li>
+  <li><b>App:</b> Start/stop rides, sync incidents, view on a map, and export data for advocacy/GIS</li>
+</ul>
+<h3>Demo Video</h3>
+<p class="project-note">
+  Full system demo showing GoPro capture on bike around the SFU Burnaby campus, incident detection,
+  app ride control, incident review, and data export/mapping.
+</p>
+
+
+<div class="video-embed">
+  <iframe
+    src="https://drive.google.com/file/d/1CGw2sgD-CvxUzIAp1bN5pHZmjvuuuvKx/preview"
+	width="640"
+	height="480"
+    allow="autoplay">
+  </iframe>
+</div>
+
+
+<div class="npits-grid">
+  <div>
+	<img src="images/npits/case.jpg" alt="Enclosure of NPITS hub" />
+	<div class="npits-caption">Enclosure of NPITS hub</div>
+  </div>
+ <div>
+	<img src="images/npits/near_passes.png" alt="App displaying near pass incidents" />
+	<div class="npits-caption">App displaying near pass incidents</div>
+</div>
+  <div>
+    <img src="images/npits/npits_slide_09.png" alt="NPITS hub concept render" />
+    <div class="npits-caption">Hub concept render</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_12.png" alt="NPITS system overview diagram" />
+    <div class="npits-caption">System overview / main workflow</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_13.png" alt="NPITS module diagram" />
+    <div class="npits-caption">Module breakdown (hub, camera, app, data pipeline)</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_14.png" alt="NPITS hardware components" />
+    <div class="npits-caption">Hardware components and enclosure</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_19.png" alt="NPITS app / UI screens" />
+    <div class="npits-caption">Companion app screens (ride control + incident review)</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_21.png" alt="NPITS data export / mapping" />
+    <div class="npits-caption">Export + mapping / analysis flow</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_20.png" alt="NPITS GoPro highlight workflow" />
+    <div class="npits-caption">GoPro HiLight tagging workflow</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_23.png" alt="NPITS results / findings" />
+    <div class="npits-caption">Results / findings</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_24.png" alt="NPITS next steps" />
+    <div class="npits-caption">Next steps</div>
+  </div>
+  <div>
+    <img src="images/npits/npits_slide_08.png" alt="NPITS title slide" />
+    <div class="npits-caption">Project overview</div>
+  </div>
+</div>
+<p>I am also an avid learner of JavaScript web development frameworks and technologies such as Node, React, Vue, and Express. Stay tuned for projects using those technologies!</p>
 							</article>
 
 						<!-- About -->
@@ -356,9 +484,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 
 				<!-- Footer -->
 					<footer id="footer">
-						<p class="copyright">&copy; 2026 Ritchie Kumar.</p>
+					<p class="copyright">
+						&copy; <span id="year"></span> Ritchie Kumar
+					</p>
 					</footer>
-
 			</div>
 
 		<!-- BG -->
@@ -370,7 +499,10 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script>
+  document.getElementById("year").textContent =
+    new Date().getFullYear();
+			</script>
 	</body>
 
 </html>
