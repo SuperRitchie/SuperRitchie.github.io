@@ -10,11 +10,15 @@
 }
 
 .strava-stat,
-.strava-activity {
+.strava-activity-card,
+.strava-types {
   border: solid 1px rgba(255, 255, 255, 0.25);
-  border-radius: 0.5rem;
-  padding: 0.85rem;
+  border-radius: 0.6rem;
   background: rgba(255, 255, 255, 0.04);
+}
+
+.strava-stat {
+  padding: 0.85rem;
 }
 
 .strava-stat strong {
@@ -29,19 +33,108 @@
   opacity: 0.8;
 }
 
-.strava-activity-list {
+.strava-types {
+  padding: 0.9rem;
+  margin: 0 0 1.25rem 0;
+}
+
+.strava-types h3 {
+  margin-top: 0;
+}
+
+.strava-type-row {
   display: grid;
+  grid-template-columns: minmax(95px, 1fr) 2fr auto;
   gap: 0.75rem;
+  align-items: center;
+  margin-top: 0.55rem;
+  font-size: 0.85rem;
+}
+
+.strava-type-track {
+  height: 0.45rem;
+  border-radius: 999px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.strava-type-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: #fc4c02;
+}
+
+.strava-activity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 0.9rem;
   margin-top: 0.75rem;
 }
 
-.strava-activity h4 {
-  margin: 0 0 0.35rem 0;
+.strava-activity-card {
+  overflow: hidden;
 }
 
-.strava-activity p {
+.strava-map {
+  height: 150px;
+  background: radial-gradient(circle at 25% 25%, rgba(252, 76, 2, 0.25), transparent 30%), rgba(255, 255, 255, 0.05);
+}
+
+.strava-map svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.strava-map rect {
+  fill: rgba(255, 255, 255, 0.035);
+  stroke: rgba(255, 255, 255, 0.14);
+}
+
+.strava-map path {
+  fill: none;
+  stroke: #fc4c02;
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.strava-map circle {
+  fill: #ffffff;
+  stroke: #fc4c02;
+  stroke-width: 2;
+}
+
+.strava-map-empty {
+  display: grid;
+  place-items: center;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.85rem;
+}
+
+.strava-activity-body {
+  padding: 0.9rem;
+}
+
+.strava-activity-body h4 {
+  margin: 0.45rem 0 0.35rem 0;
+}
+
+.strava-activity-body p {
   margin: 0;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+.strava-pill {
+  display: inline-block;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(252, 76, 2, 0.18);
+  border: solid 1px rgba(252, 76, 2, 0.45);
+  font-size: 0.72rem;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
 }
 
 .strava-updated {

@@ -19,15 +19,6 @@ const dataDir = path.join(process.cwd(), 'data');
 const outputPath = path.join(dataDir, 'strava.json');
 const refreshTokenPath = path.join(process.cwd(), '.strava-refresh-token');
 
-const cyclingSportTypes = new Set([
-  'Ride',
-  'MountainBikeRide',
-  'GravelRide',
-  'VirtualRide',
-  'EBikeRide',
-  'EMountainBikeRide',
-]);
-
 function round(value, digits = 1) {
   const multiplier = 10 ** digits;
   return Math.round((value + Number.EPSILON) * multiplier) / multiplier;
@@ -85,7 +76,7 @@ async function fetchActivities(accessToken) {
   const activities = [];
   let page = 1;
   const perPage = 100;
-  const maxPages = 10;
+  const maxPages = Number(process.env.STRAVA_MAX_PAGES || 10);
 
   while (page <= maxPages) {
     const batch = await stravaGet('/athlete/activities', accessToken, {
@@ -102,22 +93,29 @@ async function fetchActivities(accessToken) {
   return activities;
 }
 
-function summarize(activities) {
-  const visibleActivities = activities.filter((activity) => {
-    const sportType = activity.sport_type || activity.type;
-    return cyclingSportTypes.has(sportType);
-  });
+function getActivityType(activity) {
+  return activity.sport_type || activity.type || 'Activity';
+}
 
-  const stats = visibleActivities.reduce(
+function summarize(activities) {
+  const stats = activities.reduce(
     (acc, activity) => {
+      const type = getActivityType(activity);
+
       acc.activityCount += 1;
       acc.distanceKm += (activity.distance || 0) / 1000;
       acc.movingHours += (activity.moving_time || 0) / 3600;
       acc.elevationM += activity.total_elevation_gain || 0;
+      acc.typeCounts[type] = (acc.typeCounts[type] || 0) + 1;
+
       return acc;
     },
-    { activityCount: 0, distanceKm: 0, movingHours: 0, elevationM: 0 },
+    { activityCount: 0, distanceKm: 0, movingHours: 0, elevationM: 0, typeCounts: {} },
   );
+
+  const byType = Object.entries(stats.typeCounts)
+    .map(([type, count]) => ({ type, count }))
+    .sort((a, b) => b.count - a.count || a.type.localeCompare(b.type));
 
   return {
     stats: {
@@ -126,14 +124,16 @@ function summarize(activities) {
       movingHours: round(stats.movingHours, 1),
       elevationM: Math.round(stats.elevationM),
     },
-    recent: visibleActivities.slice(0, 6).map((activity) => ({
+    byType,
+    recent: activities.slice(0, 8).map((activity) => ({
       id: activity.id,
       name: activity.name,
-      type: activity.sport_type || activity.type,
+      type: getActivityType(activity),
       startDate: activity.start_date_local || activity.start_date,
       distanceKm: round((activity.distance || 0) / 1000, 1),
       movingHours: round((activity.moving_time || 0) / 3600, 1),
       elevationM: Math.round(activity.total_elevation_gain || 0),
+      summaryPolyline: activity.map?.summary_polyline || '',
     })),
   };
 }
@@ -151,8 +151,7 @@ async function main() {
   };
 
   fs.mkdirSync(dataDir, { recursive: true });
-  fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}
-`, 'utf8');
+  fs.writeFileSync(outputPath, `${JSON.stringify(output, null, 2)}\n`, 'utf8');
 
   console.log(`Wrote ${outputPath}`);
 }
