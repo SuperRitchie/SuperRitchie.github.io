@@ -1,4 +1,4 @@
-﻿<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <!--
 	Dimension by HTML5 UP
 	html5up.net | @ajlkn
@@ -12,6 +12,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/npits.css" />
+		<link rel="stylesheet" href="assets/css/strava.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	<style>
 </style>
@@ -37,6 +38,7 @@
 								<li><a href="#intro">Intro</a></li>
 								<li><a href="#work">Work</a></li>
 								<li><a href="#about">About</a></li>
+								<li><a href="#strava">Strava</a></li>
 								<li><a href="#contact">Contact</a></li>
 								<!--<li><a href="#elements">Elements</a></li>-->
 							</ul>
@@ -206,6 +208,18 @@
 								<span class="image main"><img src="images/ProfileIMG-Crop.jpg" alt="" /></span>
 								<p>Hello, I'm Ritchie Kumar, a recent (Sep 2025) computer engineering graduate at Simon Fraser University based in Vancouver, BC! I am interested in finding efficient solutions to complex problems, whether that be websites, applications, or programming in general. My goal is to work with bleeding-edge products to create unique and simple solutions to complex problems.</p>
 								<p>Outside of school, my interests include: biking, board games, video games, investing, and cooking!</p>
+							</article>
+
+
+						<!-- Strava -->
+							<article id="strava">
+								<h2 class="major">Strava</h2>
+								<p>
+									A monthly snapshot of my recent Strava activities, generated automatically with GitHub Actions
+								</p>
+								<div id="strava-root" class="strava-panel">
+									<p>Loading Strava activities...</p>
+								</div>
 							</article>
 
 						<!-- Contact -->
@@ -499,6 +513,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
+			<script src="assets/js/strava.js"></script>
 			<script>
   document.getElementById("year").textContent =
     new Date().getFullYear();
