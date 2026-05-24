@@ -1,11 +1,66 @@
 {
-  "lastUpdated": "2026-05-24T06:50:27.337Z",
+  "lastUpdated": "2026-05-24T07:35:00.892Z",
   "profileUrl": "https://www.strava.com/athletes/140703837",
   "stats": {
-    "activityCount": 0,
-    "distanceKm": 0,
-    "movingHours": 0,
-    "elevationM": 0
+    "activityCount": 17,
+    "distanceKm": 1208.1,
+    "movingHours": 68.6,
+    "elevationM": 14862
   },
-  "recent": []
+  "recent": [
+    {
+      "id": 15991520844,
+      "name": "SFU Cycling Club Seymour Demonstration Forest Ride",
+      "type": "Ride",
+      "startDate": "2025-09-30T08:01:07Z",
+      "distanceKm": 67.2,
+      "movingHours": 3.4,
+      "elevationM": 731
+    },
+    {
+      "id": 15721918834,
+      "name": "Gran Fondo Whistler 2025",
+      "type": "Ride",
+      "startDate": "2025-09-06T07:09:54Z",
+      "distanceKm": 104.2,
+      "movingHours": 6.6,
+      "elevationM": 1738
+    },
+    {
+      "id": 15484039028,
+      "name": "Tour de Victoria!",
+      "type": "Ride",
+      "startDate": "2025-08-16T06:43:14Z",
+      "distanceKm": 163.4,
+      "movingHours": 9.1,
+      "elevationM": 2396
+    },
+    {
+      "id": 15105469673,
+      "name": "Okanagan Gran Fondo! 🥵",
+      "type": "Ride",
+      "startDate": "2025-07-13T06:33:09Z",
+      "distanceKm": 155.5,
+      "movingHours": 7.8,
+      "elevationM": 1674
+    },
+    {
+      "id": 14720426497,
+      "name": "Night stroll",
+      "type": "Ride",
+      "startDate": "2025-06-06T22:19:27Z",
+      "distanceKm": 25.2,
+      "movingHours": 1.6,
+      "elevationM": 170
+    },
+    {
+      "id": 14700773961,
+      "name": "UBC ride",
+      "type": "Ride",
+      "startDate": "2025-06-04T16:21:44Z",
+      "distanceKm": 29.3,
+      "movingHours": 2.1,
+      "elevationM": 233
+    }
+  ]
 }
