@@ -86,9 +86,9 @@
       `;
     }
 
-    const width = 280;
-    const height = 150;
-    const padding = 14;
+    const width = 320;
+    const height = 170;
+    const padding = 16;
     const lats = points.map(([lat]) => lat);
     const lngs = points.map(([, lng]) => lng);
     const minLat = Math.min(...lats);
@@ -98,20 +98,26 @@
     const latRange = maxLat - minLat || 1;
     const lngRange = maxLng - minLng || 1;
 
-    const pathData = points
-      .map(([lat, lng], index) => {
-        const x = padding + ((lng - minLng) / lngRange) * (width - padding * 2);
-        const y = height - padding - ((lat - minLat) / latRange) * (height - padding * 2);
-        return `${index === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`;
-      })
+    const projected = points.map(([lat, lng]) => ({
+      x: padding + ((lng - minLng) / lngRange) * (width - padding * 2),
+      y: height - padding - ((lat - minLat) / latRange) * (height - padding * 2),
+    }));
+
+    const pathData = projected
+      .map(({ x, y }, index) => `${index === 0 ? 'M' : 'L'} ${x.toFixed(1)} ${y.toFixed(1)}`)
       .join(' ');
+
+    const start = projected[0];
+    const end = projected[projected.length - 1];
 
     return `
       <div class="strava-map">
         <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="activity route preview">
           <rect x="1" y="1" width="${width - 2}" height="${height - 2}" rx="14"></rect>
-          <path d="${pathData}"></path>
-          <circle cx="${pathData.match(/M ([\d.]+) ([\d.]+)/)?.[1] || padding}" cy="${pathData.match(/M ([\d.]+) ([\d.]+)/)?.[2] || padding}" r="3"></circle>
+          <path class="strava-route-shadow" d="${pathData}"></path>
+          <path class="strava-route" d="${pathData}"></path>
+          <circle class="strava-route-start" cx="${start.x.toFixed(1)}" cy="${start.y.toFixed(1)}" r="3.5"></circle>
+          <circle class="strava-route-end" cx="${end.x.toFixed(1)}" cy="${end.y.toFixed(1)}" r="4.5"></circle>
         </svg>
       </div>
     `;
@@ -135,6 +141,28 @@
             <strong>${formatNumber(item.count)}</strong>
           </div>
         `).join('')}
+      </div>
+    `;
+  }
+
+  function renderActivityCard(activity) {
+    return `
+      <div class="strava-activity-card">
+        ${routeSvg(activity.summaryPolyline)}
+        <div class="strava-activity-body">
+          <div class="strava-activity-topline">
+            <span class="strava-pill">${escapeHtml(formatActivityType(activity.type))}</span>
+            <span>${formatDate(activity.startDate)}</span>
+          </div>
+          <h4>
+            <a href="${activityUrl(activity.id)}" target="_blank" rel="noopener">
+              ${escapeHtml(activity.name)}
+            </a>
+          </h4>
+          <p>
+            ${formatDecimal(activity.distanceKm)} km · ${formatDecimal(activity.movingHours)} hr · ${formatNumber(activity.elevationM)} m gain
+          </p>
+        </div>
       </div>
     `;
   }
@@ -172,22 +200,7 @@
 
         <h3>Latest activities</h3>
         <div class="strava-activity-grid">
-          ${activities.length === 0 ? '<p>No matching Strava activities found yet.</p>' : activities.map((activity) => `
-            <article class="strava-activity-card">
-              ${routeSvg(activity.summaryPolyline)}
-              <div class="strava-activity-body">
-                <span class="strava-pill">${escapeHtml(formatActivityType(activity.type))}</span>
-                <h4>
-                  <a href="${activityUrl(activity.id)}" target="_blank" rel="noopener">
-                    ${escapeHtml(activity.name)}
-                  </a>
-                </h4>
-                <p>
-                  ${formatDate(activity.startDate)} · ${formatDecimal(activity.distanceKm)} km · ${formatDecimal(activity.movingHours)} hr · ${formatNumber(activity.elevationM)} m gain
-                </p>
-              </div>
-            </article>
-          `).join('')}
+          ${activities.length === 0 ? '<p>No Strava activities found yet.</p>' : activities.map(renderActivityCard).join('')}
         </div>
 
         <p class="strava-updated">

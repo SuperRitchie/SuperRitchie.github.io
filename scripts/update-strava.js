@@ -18,6 +18,7 @@ const apiBaseUrl = 'https://www.strava.com/api/v3';
 const dataDir = path.join(process.cwd(), 'data');
 const outputPath = path.join(dataDir, 'strava.json');
 const refreshTokenPath = path.join(process.cwd(), '.strava-refresh-token');
+const recentActivityLimit = Number(process.env.STRAVA_RECENT_LIMIT || 8);
 
 function round(value, digits = 1) {
   const multiplier = 10 ** digits;
@@ -93,11 +94,35 @@ async function fetchActivities(accessToken) {
   return activities;
 }
 
+async function fetchRecentActivityDetails(accessToken, activities) {
+  const recent = activities.slice(0, recentActivityLimit);
+  const detailed = [];
+
+  for (const activity of recent) {
+    try {
+      const detail = await stravaGet(`/activities/${activity.id}`, accessToken, {
+        include_all_efforts: false,
+      });
+
+      detailed.push({
+        ...activity,
+        ...detail,
+        map: detail.map || activity.map,
+      });
+    } catch (error) {
+      console.warn(`Could not fetch details for activity ${activity.id}: ${error.message}`);
+      detailed.push(activity);
+    }
+  }
+
+  return detailed;
+}
+
 function getActivityType(activity) {
   return activity.sport_type || activity.type || 'Activity';
 }
 
-function summarize(activities) {
+function summarize(activities, recentActivities) {
   const stats = activities.reduce(
     (acc, activity) => {
       const type = getActivityType(activity);
@@ -125,7 +150,7 @@ function summarize(activities) {
       elevationM: Math.round(stats.elevationM),
     },
     byType,
-    recent: activities.slice(0, 8).map((activity) => ({
+    recent: recentActivities.map((activity) => ({
       id: activity.id,
       name: activity.name,
       type: getActivityType(activity),
@@ -133,7 +158,7 @@ function summarize(activities) {
       distanceKm: round((activity.distance || 0) / 1000, 1),
       movingHours: round((activity.moving_time || 0) / 3600, 1),
       elevationM: Math.round(activity.total_elevation_gain || 0),
-      summaryPolyline: activity.map?.summary_polyline || '',
+      summaryPolyline: activity.map?.summary_polyline || activity.map?.polyline || '',
     })),
   };
 }
@@ -142,7 +167,8 @@ async function main() {
   const accessToken = await refreshAccessToken();
   const athlete = await stravaGet('/athlete', accessToken);
   const activities = await fetchActivities(accessToken);
-  const summary = summarize(activities);
+  const recentActivities = await fetchRecentActivityDetails(accessToken, activities);
+  const summary = summarize(activities, recentActivities);
 
   const output = {
     lastUpdated: new Date().toISOString(),

@@ -10,7 +10,7 @@
 }
 
 .strava-stat,
-.strava-activity-card,
+#main .strava-activity-card,
 .strava-types {
   border: solid 1px rgba(255, 255, 255, 0.25);
   border-radius: 0.6rem;
@@ -71,13 +71,28 @@
   margin-top: 0.75rem;
 }
 
-.strava-activity-card {
+#main .strava-activity-card {
+  display: block;
+  position: relative;
   overflow: hidden;
+  width: auto;
+  max-width: none;
+  padding: 0;
+  opacity: 1;
+  transform: none;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+#main .strava-activity-card:hover {
+  border-color: rgba(252, 76, 2, 0.7);
+  background: rgba(255, 255, 255, 0.065);
 }
 
 .strava-map {
-  height: 150px;
-  background: radial-gradient(circle at 25% 25%, rgba(252, 76, 2, 0.25), transparent 30%), rgba(255, 255, 255, 0.05);
+  height: 170px;
+  background:
+    radial-gradient(circle at 25% 25%, rgba(252, 76, 2, 0.25), transparent 30%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
 }
 
 .strava-map svg {
@@ -91,7 +106,15 @@
   stroke: rgba(255, 255, 255, 0.14);
 }
 
-.strava-map path {
+.strava-route-shadow {
+  fill: none;
+  stroke: rgba(0, 0, 0, 0.45);
+  stroke-width: 7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.strava-route {
   fill: none;
   stroke: #fc4c02;
   stroke-width: 4;
@@ -99,7 +122,13 @@
   stroke-linejoin: round;
 }
 
-.strava-map circle {
+.strava-route-start {
+  fill: #1b1f22;
+  stroke: #ffffff;
+  stroke-width: 2;
+}
+
+.strava-route-end {
   fill: #ffffff;
   stroke: #fc4c02;
   stroke-width: 2;
@@ -114,6 +143,15 @@
 
 .strava-activity-body {
   padding: 0.9rem;
+}
+
+.strava-activity-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.72rem;
 }
 
 .strava-activity-body h4 {
