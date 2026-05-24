@@ -28,11 +28,6 @@ const cyclingSportTypes = new Set([
   'EMountainBikeRide',
 ]);
 
-function startOfCurrentYearEpochSeconds() {
-  const now = new Date();
-  return Math.floor(Date.UTC(now.getUTCFullYear(), 0, 1, 0, 0, 0) / 1000);
-}
-
 function round(value, digits = 1) {
   const multiplier = 10 ** digits;
   return Math.round((value + Number.EPSILON) * multiplier) / multiplier;
@@ -90,11 +85,10 @@ async function fetchActivities(accessToken) {
   const activities = [];
   let page = 1;
   const perPage = 100;
-  const after = startOfCurrentYearEpochSeconds();
+  const maxPages = 10;
 
-  while (page <= 3) {
+  while (page <= maxPages) {
     const batch = await stravaGet('/athlete/activities', accessToken, {
-      after,
       page,
       per_page: perPage,
     });

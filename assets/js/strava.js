@@ -36,7 +36,7 @@
         <div class="strava-summary">
           <div class="strava-stat">
             <strong>${formatDecimal(stats.distanceKm)}</strong>
-            <span>km this year</span>
+            <span>km all time</span>
           </div>
           <div class="strava-stat">
             <strong>${formatNumber(stats.activityCount)}</strong>
